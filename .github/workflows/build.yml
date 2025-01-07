@@ -1,4 +1,4 @@
-name: christophl - Docker-build-with-evidence
+name: christophl--Docker-build-with-evidence
 
 on:
   [workflow_dispatch]
