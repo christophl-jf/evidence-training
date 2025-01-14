@@ -50,7 +50,7 @@ jobs:
             opa eval --input ./evidence_graph.json --data policy/policy.rego "data.policy.output" | jq '.result[0].expressions[0].value' | tee ./promotion_failed.json
             jf evd create --key "${{ secrets.PRIVATE_KEY }}" --key-alias ${{ secrets.KEY_ALIAS }} \
               --release-bundle ${{ github.actor }}-evidence-training --release-bundle-version ${{ inputs.rb-version }} \
-              --predicate ./promotion_failed.json --predicate-type https://in-toto.io/promotion/failed
+              --predicate ./promotion_failed.json --predicate-type https://promotion.to/qa/failed
             echo "Fail promotion policy check" >> $GITHUB_STEP_SUMMARY
             exit 1
           fi
