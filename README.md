@@ -1,8 +1,8 @@
-# RLM/Evidence training
+# RLM/Evidence example
 
 Artifactory enables you to attach evidence (signed metadata) to a designated subject, such as an artifact, build, package, or Release Bundle v2. These evidence files provide a record of an external process performed on the subject, such as test results, vulnerability scans, or official approval.
 
-In this training we will exrsize the process of attaching different types of evidences, including:
+In this example we will exrsize the process of attaching different types of evidences, including:
 
 * Package evidence
 * Build evidence
@@ -12,7 +12,7 @@ In this training we will exrsize the process of attaching different types of evi
 
 We will also experience validating the existing evidences, and apply an OPA (Open Policy Engine) policy in order to control the Release bundle promotion flow
 
-These are the steps we will cover suring our training:
+These are the steps we will cover:
 
 1. [Prerequisites](#prerequisites)
 2. [Initial configuration](#initial-configuration)  
@@ -30,9 +30,6 @@ For more information about evidence on the JFrog platform, see the following res
 * [Help center](https://jfrog.com/help/r/evidence-management/evidence-management)
 * [GitHub public evidence examples](https://github.com/jfrog/Evidence-Examples)
 * [Evidence solution sheet](https://drive.google.com/file/d/16BIn_PR9mR-KzvMAoWi-n_1HmUfhRiAW/view?usp=sharing)
-* [Training Deck](https://docs.google.com/presentation/d/1nZWFAMEOdW9n1uCNQiIVJSOFrsWGQfs-JNjydP5sxwM/edit?usp=sharing)
-* [FAQ page](https://docs.google.com/document/d/1Yzodo2Nl3XsRQYXxAzW0yidrG9XqbqmJc-DYrpVdiGE/edit?usp=sharing)
-* [Evidence service confluence space](https://jfrog-int.atlassian.net/wiki/spaces/DPCP/pages/981631021/Evidence+Knowledge+Transfer)
 
 For more information related to OPA (Open Policy Agent) see the following resources:
 * [OPA help center](https://www.openpolicyagent.org/docs/latest/)
@@ -42,14 +39,14 @@ For more information related to OPA (Open Policy Agent) see the following resour
 
 ## 1. Prerequisites {#prerequisites}
 
-* Create a dedicated OCI repository in [solenglatest.jfrog.io](https://solenglatest.jfrog.io) and assign it to DEV environment.
-* Create another dedicated OCI repository in [solenglatest.jfrog.io](https://solenglatest.jfrog.io) and assign it to QA environment.
+* Create a dedicated OCI repository and assign it to DEV environment.
+* Create another dedicated OCI repository and assign it to QA environment.
 * Create a evidence signing key using the following commands:
   ```
   openssl genrsa -out private.pem 2048
   openssl rsa -in private.pem -pubout -out public.pem
   ```
-*  Upload the public key to [solenglatest.jfrog.io](https://solenglatest.jfrog.io) using the [public keys](https://jfrog.com/help/r/jfrog-platform-administration-documentation/manage-public-keys) screen.
+*  Upload the public key using the [public keys](https://jfrog.com/help/r/jfrog-platform-administration-documentation/manage-public-keys) screen.
    * Use pbcopy to copy the public key to the artifactory UI to make sure no special characters are copied, for example:
      ```
      cat public.pem | pbcopy
@@ -64,7 +61,7 @@ In this step you will configure your environment to be able to run the evidence 
 3. Update the REPO_NAME variable in th build.yml workflow file to the OCI dev repository you have created.
 4. Add the following github actions variables/secrets:
    1. Variables:
-      1. ARTIFACTORY_URL - https://solenglatest.jfrog.io.
+      1. ARTIFACTORY_URL - https://***t.jfrog.io.
    2. Secrets:
       1. ARTIFACTORY_ACCESS_TOKEN - generate an access token (Not a reference token) to be used by docker login.
       3. PRIVATE_KEY - The evidence signing key you have generated as part of preparing to the training.
